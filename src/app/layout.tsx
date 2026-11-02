@@ -6,6 +6,7 @@ import { AuthProvider } from '@/context/auth-context';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Toaster } from 'sonner';
+import { Suspense } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,7 +33,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            <Navbar />
+            <Suspense fallback={<div className="h-16" aria-hidden="true" />}>
+              <Navbar />
+            </Suspense>
             <div className="flex-1">{children}</div>
             <Footer />
             <Toaster position="top-right" richColors />
