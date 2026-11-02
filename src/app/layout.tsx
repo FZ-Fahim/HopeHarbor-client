@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/context/auth-context';
 import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
 import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -33,6 +34,7 @@ export default function RootLayout({
           <AuthProvider>
             <Navbar />
             <div className="flex-1">{children}</div>
+            <Footer />
             <Toaster position="top-right" richColors />
           </AuthProvider>
         </ThemeProvider>
