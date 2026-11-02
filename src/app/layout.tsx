@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/context/auth-context';
+import { Navbar } from '@/components/navbar';
 import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} min-h-screen bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased`}>
+      <body
+        className={`${inter.className} min-h-screen flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -28,7 +31,8 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <AuthProvider>
-            {children}
+            <Navbar />
+            <div className="flex-1">{children}</div>
             <Toaster position="top-right" richColors />
           </AuthProvider>
         </ThemeProvider>
