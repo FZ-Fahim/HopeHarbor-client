@@ -1,7 +1,7 @@
 # HopeHarbor — Community Social Development & Events Platform
 
-> **Live Application URL**: [https://hopeharbor.vercel.app](https://hope-harbor-client-eight.vercel.app) *(Update with your deployed Vercel link)*  
-> **Server API Endpoint**: [https://hopeharbor-server.onrender.com](https://hope-harbor-server.vercel.app) *(Update with your deployed Render link)*
+> **Live Application URL**: [https://hopeharbor.vercel.app](https://hope-harbor-client-eight.vercel.app)
+> **Server API Endpoint**: [https://hopeharbor-server.onrender.com](https://hope-harbor-server.vercel.app)
 
 ---
 

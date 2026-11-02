@@ -30,16 +30,28 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       }
     : null;
 
-  const loginWithGoogle = async () => {
+    const loginWithGoogle = async () => {
     try {
-      await authClient.signIn.social({
+      const response = await authClient.signIn.social({
         provider: 'google',
         callbackURL: `${window.location.origin}/events`,
       });
+
+      // If Better Auth returned an error
+      if (response?.error) {
+        toast.error('Google Sign-In error', {
+          description: response.error.message || 'Could not initiate Google login',
+        });
+        return;
+      }
+
+      // Explicitly redirect if Better Auth returns the Google OAuth URL
+      if (response?.data?.url) {
+        window.location.href = response.data.url;
+      }
     } catch (error: unknown) {
       toast.error('Google Sign-In failed', {
-        description:
-          error instanceof Error ? error.message : 'Please try again later',
+        description: error instanceof Error ? error.message : 'Please try again later',
       });
     }
   };
