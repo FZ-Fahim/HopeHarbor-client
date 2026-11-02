@@ -39,16 +39,18 @@ export default function CreateEventPage() {
   const [location, setLocation] = React.useState('');
   const [date, setDate] = React.useState('');
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [tomorrowString, setTomorrowString] = React.useState('');
+  const dateInputRef = React.useRef<HTMLInputElement>(null);
 
-  // Compute the minimum date after mount so the current time is not read during prerendering.
+  // Set the minimum date after mount so the current time is not read during prerendering.
   React.useEffect(() => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     const year = tomorrow.getFullYear();
     const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
     const day = String(tomorrow.getDate()).padStart(2, '0');
-    setTomorrowString(`${year}-${month}-${day}`);
+    if (dateInputRef.current) {
+      dateInputRef.current.min = `${year}-${month}-${day}`;
+    }
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -219,9 +221,9 @@ export default function CreateEventPage() {
                 <div className="relative">
                   <Calendar className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" />
                   <input
+                    ref={dateInputRef}
                     type="date"
                     required
-                    min={tomorrowString} // Strictly blocks selecting past dates in HTML5 datepicker
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer"
