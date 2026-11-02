@@ -159,7 +159,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="border-t border-slate-200/80 dark:border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
-          <p>© {new Date().getFullYear()} HopeHarbor Community Platform. Built for local social impact.</p>
+          <p>© 2026 HopeHarbor Community Platform. Built for local social impact.</p>
           <div className="flex items-center gap-4">
             <span className="hover:text-emerald-600 dark:hover:text-emerald-400 cursor-pointer">
               Privacy Guidelines

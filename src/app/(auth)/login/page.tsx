@@ -50,7 +50,12 @@ export default function LoginPage() {
         icon: <CheckCircle2 className="w-5 h-5 text-emerald-500" />,
       });
 
-      router.push('/events');
+      const returnUrl =
+          new URLSearchParams(window.location.search).get('returnUrl') ||
+          sessionStorage.getItem('redirectAfterLogin') ||
+          '/events';
+        sessionStorage.removeItem('redirectAfterLogin');
+        router.push(returnUrl);
     } catch (err: unknown) {
       toast.error('Sign-in error', {
         description:
