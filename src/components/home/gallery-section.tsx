@@ -1,4 +1,4 @@
-import { Camera, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 const galleryPhotos = [
   {
@@ -47,47 +47,46 @@ const galleryPhotos = [
 
 export function GallerySection() {
   return (
-    <section className="py-16 sm:py-24 bg-white dark:bg-slate-950 transition-colors">
+    <section className="bg-slate-50/60 dark:bg-[#0d131f] border-y border-slate-200/80 dark:border-slate-800 transition-colors py-16 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 text-xs font-semibold">
-            <Camera className="w-3.5 h-3.5" />
-            <span>Community Moments</span>
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-400">
+            <span>📸 Ground Reality</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
-            Actions Captured on the Ground
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
+            Documenting Community Compassion
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
-            Real snapshots from grassroots volunteer drives, blanket handouts, and environmental efforts organized by our members.
+          <p className="text-sm text-slate-600 dark:text-slate-400 sm:text-base">
+            Unfiltered moments from winter warmth drives in Mirpur, blanket handouts in Mohammadpur, and urban afforestation.
           </p>
         </div>
 
         {/* Photo Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {galleryPhotos.map((item, index) => (
             <div
               key={index}
-              className="group relative rounded-3xl overflow-hidden aspect-[4/3] bg-slate-100 dark:bg-slate-800 shadow-sm border border-slate-200/80 dark:border-slate-800"
+              className={`group relative overflow-hidden rounded-3xl border border-slate-800/80 bg-slate-900 shadow-sm ${index === 0 ? 'aspect-[4/3] lg:col-span-2 lg:row-span-2 lg:h-full lg:aspect-auto' : index === 3 ? 'aspect-[4/3]' : 'aspect-[16/10]'}`}
             >
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               {/* Gradient Dark Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0a0e17] via-slate-950/40 to-transparent" />
 
               {/* Photo Caption Content */}
-              <div className="absolute bottom-0 inset-x-0 p-5 text-white space-y-1.5">
-                <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/90 text-white backdrop-blur-sm">
+              <div className="absolute inset-x-0 bottom-0 space-y-1.5 p-5 text-white">
+                <span className="inline-block rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-1 text-[10px] font-semibold text-amber-300 backdrop-blur-sm">
                   {item.category}
                 </span>
                 <h3 className="text-base font-bold leading-snug">
                   {item.title}
                 </h3>
                 <div className="flex items-center gap-1.5 text-xs text-slate-300">
-                  <MapPin className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                  <MapPin className="h-3.5 w-3.5 shrink-0 text-amber-400" />
                   <span>{item.location}</span>
                 </div>
               </div>

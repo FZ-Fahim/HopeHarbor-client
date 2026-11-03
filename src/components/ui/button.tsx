@@ -29,7 +29,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm hover:shadow focus:ring-emerald-500 dark:bg-emerald-600 dark:hover:bg-emerald-500',
+        'bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold shadow-md hover:shadow-amber-500/20 focus:ring-amber-400 dark:bg-amber-500 dark:hover:bg-amber-400 dark:text-slate-950',
       secondary:
         'bg-slate-100 hover:bg-slate-200 text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-100 focus:ring-slate-400',
       outline:

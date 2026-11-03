@@ -7,6 +7,7 @@ import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Toaster } from 'sonner';
 import { Suspense } from 'react';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,19 +25,18 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} min-h-screen flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased`}
+        className={`${inter.className} min-h-screen flex flex-col bg-zinc-50 dark:bg-[#0a0e17] text-zinc-900 dark:text-zinc-100 antialiased`}
       >
+        <Script id="theme-init" strategy="beforeInteractive">
+          {`try { var theme = localStorage.getItem('theme') || 'system'; var dark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches); document.documentElement.classList.toggle('dark', dark); document.documentElement.style.colorScheme = dark ? 'dark' : 'light'; } catch (_) {}`}
+        </Script>
         <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
         >
           <AuthProvider>
             <Suspense fallback={<div className="h-16" aria-hidden="true" />}>
               <Navbar />
             </Suspense>
-            <div className="flex-1">{children}</div>
+            <div className="flex-1 pt-20">{children}</div>
             <Footer />
             <Toaster position="top-right" richColors />
           </AuthProvider>

@@ -90,7 +90,7 @@ export default function ProfilePage() {
       if (res.ok && data.success) {
         toast.success('Profile Updated Successfully!', {
           description: 'Your changes are now live across HopeHarbor.',
-          icon: <CheckCircle2 className="w-5 h-5 text-emerald-500" />,
+          icon: <CheckCircle2 className="w-5 h-5 text-amber-500" />,
         });
         // Immediately sync with Navbar and Auth Context
         await refreshUser();
@@ -117,10 +117,10 @@ export default function ProfilePage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
+      <div className="min-h-screen pt-28 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8 bg-slate-50 dark:bg-[#0a0e17] transition-colors">
         {/* Header */}
         <div className="pb-6 border-b border-slate-200/80 dark:border-slate-800">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold mb-2">
             <UserIcon className="w-3.5 h-3.5" />
             <span>Volunteer Profile</span>
           </div>
@@ -135,9 +135,9 @@ export default function ProfilePage() {
         {/* Profile Card & Impact Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* User Overview Card */}
-          <div className="md:col-span-1 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 text-center space-y-4 shadow-sm">
+          <div className="md:col-span-1 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 text-center space-y-4 shadow-sm backdrop-blur-sm">
             {/* Avatar Preview */}
-            <div className="relative mx-auto w-24 h-24 rounded-full overflow-hidden border-4 border-emerald-500/20 bg-emerald-100 dark:bg-emerald-950/60 flex items-center justify-center text-emerald-700 dark:text-emerald-300 text-2xl font-bold">
+            <div className="relative mx-auto w-24 h-24 rounded-full overflow-hidden border-4 border-amber-500/20 bg-amber-500/10 flex items-center justify-center text-amber-500 text-2xl font-bold">
               {imageUrl || user?.image ? (
                 <img
                   src={imageUrl || user?.image}
@@ -163,9 +163,9 @@ export default function ProfilePage() {
               </p>
             </div>
 
-            <div className="pt-2 flex items-center justify-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+            <div className="pt-2 flex items-center justify-center gap-1.5 text-xs text-amber-600 dark:text-amber-400 font-semibold">
               <ShieldCheck className="w-4 h-4" />
-              <span>Verified Volunteer</span>
+              <span>Verified Community Member</span>
             </div>
 
             <div className="border-t border-slate-100 dark:border-slate-800 pt-3 text-[11px] text-slate-400 flex items-center justify-center gap-1">
@@ -178,8 +178,8 @@ export default function ProfilePage() {
 
           {/* Impact Stats Counters */}
           <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4">
+            <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 flex flex-col justify-between shadow-sm backdrop-blur-sm">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4">
                 <FolderKanban className="w-6 h-6" />
               </div>
               <div className="space-y-1">
@@ -195,8 +195,8 @@ export default function ProfilePage() {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 flex flex-col justify-between shadow-sm">
-              <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-4">
+            <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 flex flex-col justify-between shadow-sm backdrop-blur-sm">
+              <div className="w-12 h-12 rounded-2xl bg-orange-500/10 text-orange-500 flex items-center justify-center mb-4">
                 <BookmarkCheck className="w-6 h-6" />
               </div>
               <div className="space-y-1">
@@ -215,7 +215,7 @@ export default function ProfilePage() {
         </div>
 
         {/* Update Profile Form */}
-        <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-sm space-y-6">
+        <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900/80 p-6 sm:p-8 shadow-sm backdrop-blur-sm space-y-6">
           <div className="border-b border-slate-100 dark:border-slate-800 pb-4">
             <h2 className="text-lg font-bold text-slate-900 dark:text-white">
               Edit Profile Details
@@ -258,7 +258,7 @@ export default function ProfilePage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your full name"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
               </div>
             </div>
@@ -275,7 +275,7 @@ export default function ProfilePage() {
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                   placeholder="https://images.unsplash.com/..."
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
                 />
               </div>
               <p className="text-[11px] text-slate-400 mt-1">
@@ -284,7 +284,7 @@ export default function ProfilePage() {
             </div>
 
             <div className="pt-2 flex justify-end">
-              <Button type="submit" isLoading={isUpdating} size="md">
+              <Button type="submit" isLoading={isUpdating} size="md" className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-6 py-2.5 rounded-xl shadow-md transition-all">
                 <Sparkles className="w-4 h-4 mr-1.5" />
                 Save Profile Changes
               </Button>

@@ -20,6 +20,8 @@ import {
   Users,
   Eye,
   AlertTriangle,
+  HandHeart,
+  Clock3,
 } from 'lucide-react';
 
 export default function ManageEventsPage() {
@@ -35,6 +37,11 @@ export default function ManageEventsPage() {
   const [isDeleting, setIsDeleting] = React.useState(false);
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+
+  const upcomingEvent = React.useMemo(() => events
+    .filter((event) => new Date(event.date).getTime() > Date.now())
+    .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())[0], [events]);
+  const totalPledges = events.reduce((total, event) => total + (event.attendeesCount || 0), 0);
 
   const fetchMyEvents = React.useCallback(async () => {
     try {
@@ -108,16 +115,16 @@ export default function ManageEventsPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="min-h-screen pt-28 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-slate-50 dark:bg-[#0a0e17] transition-colors">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200/80 dark:border-slate-800">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-2">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-semibold mb-2">
               <FolderKanban className="w-3.5 h-3.5" />
-              <span>Organizer Dashboard</span>
+              <span>ORGANIZER DASHBOARD</span>
             </div>
             <h1 className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Manage Your Events
+              Manage Community Initiatives
             </h1>
             <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
               Update details, monitor attendee registration, or cancel drives organized by you.
@@ -126,12 +133,29 @@ export default function ManageEventsPage() {
 
           <Link
             href="/events/create"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm transition-all shrink-0"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 text-sm font-bold shadow-sm transition-all shrink-0"
           >
             <PlusCircle className="w-4 h-4" />
-            Create Another Event
+            Host Another Event
           </Link>
         </div>
+
+        {!isLoading && (
+          <section aria-label="Organizer overview" className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-7">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"><FolderKanban className="w-4 h-4 text-amber-500" /> Total Drives Hosted</div>
+              <p className="mt-2 text-2xl font-extrabold text-slate-900 dark:text-white">{events.length}</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"><HandHeart className="w-4 h-4 text-amber-500" /> Total Volunteer Pledges</div>
+              <p className="mt-2 text-2xl font-extrabold text-slate-900 dark:text-white">{totalPledges}</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 p-4 shadow-sm">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"><Clock3 className="w-4 h-4 text-amber-500" /> Next Upcoming Date</div>
+              <p className="mt-2 text-lg font-extrabold text-slate-900 dark:text-white">{upcomingEvent ? formatDate(upcomingEvent.date) : 'No upcoming drives'}</p>
+            </div>
+          </section>
+        )}
 
         {/* Loading Skeletons */}
         {isLoading && (
@@ -148,10 +172,14 @@ export default function ManageEventsPage() {
             {events.map((event) => (
               <div
                 key={event._id}
-                className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm hover:shadow transition-all"
+                className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 hover:border-amber-500/40 transition-all shadow-sm"
               >
                 {/* Event Info */}
                 <div className="flex items-center gap-4 min-w-0">
+                  <div className="w-14 h-16 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/30 flex flex-col items-center justify-center shrink-0 text-center">
+                    <span className="text-[10px] font-black text-amber-600 dark:text-amber-400 uppercase">{new Date(event.date).toLocaleDateString('en-US', { month: 'short' })}</span>
+                    <span className="text-2xl font-extrabold text-slate-900 dark:text-white leading-none">{new Date(event.date).getDate()}</span>
+                  </div>
                   <div className="w-20 h-20 rounded-xl overflow-hidden bg-slate-100 dark:bg-slate-800 shrink-0">
                     <img
                       src={event.thumbnailUrl}
@@ -166,7 +194,7 @@ export default function ManageEventsPage() {
 
                   <div className="space-y-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase bg-amber-50 dark:bg-amber-950 text-amber-700 dark:text-amber-400">
                         {event.eventType}
                       </span>
                       <span className="text-xs text-slate-400 flex items-center gap-1">
@@ -180,7 +208,7 @@ export default function ManageEventsPage() {
                     </h3>
 
                     <div className="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
-                      <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-medium">
+                      <span className="flex items-center gap-1 text-amber-600 dark:text-amber-400 font-medium">
                         <Calendar className="w-3.5 h-3.5" />
                         {formatDate(event.date)}
                       </span>
@@ -204,9 +232,9 @@ export default function ManageEventsPage() {
 
                   <button
                     onClick={() => handleEditClick(event)}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-amber-500 hover:text-slate-950 dark:bg-slate-800 dark:hover:bg-amber-500 dark:hover:text-slate-950 text-slate-700 dark:text-slate-200 transition-colors cursor-pointer"
                   >
-                    <Pencil className="w-3.5 h-3.5 text-blue-500" />
+                    <Pencil className="w-3.5 h-3.5" />
                     <span>Update</span>
                   </button>
 
@@ -237,7 +265,7 @@ export default function ManageEventsPage() {
             </p>
             <Link
               href="/events/create"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-slate-950 hover:bg-amber-400 shadow-sm"
             >
               <PlusCircle className="w-4 h-4" />
               Host an Event

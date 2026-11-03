@@ -87,7 +87,7 @@ export default function RegisterPage() {
       await refreshUser();
       toast.success('Account created successfully!', {
         description: `Welcome to HopeHarbor, ${name}!`,
-        icon: <CheckCircle2 className="w-5 h-5 text-emerald-500" />,
+        icon: <CheckCircle2 className="w-5 h-5 text-amber-500 dark:text-amber-400" />,
       });
 
       router.push('/events');
@@ -104,10 +104,11 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-8 rounded-3xl shadow-sm">
+      <div className="max-w-md w-full bg-radial from-amber-500/5 to-transparent p-3 sm:p-4 rounded-[2rem]">
+      <div className="w-full space-y-8 bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 p-8 rounded-3xl shadow-sm">
         {/* Brand Header */}
         <div className="text-center space-y-2">
-          <div className="inline-flex w-12 h-12 rounded-2xl bg-emerald-600 text-white items-center justify-center shadow-md shadow-emerald-500/20 mb-2">
+          <div className="inline-flex w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-500 dark:text-amber-400 items-center justify-center mb-2">
             <HeartHandshake className="w-7 h-7" />
           </div>
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -173,7 +174,7 @@ export default function RegisterPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Ferdous Zaman"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
               />
             </div>
           </div>
@@ -191,7 +192,7 @@ export default function RegisterPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
               />
             </div>
           </div>
@@ -208,7 +209,7 @@ export default function RegisterPage() {
                 value={photoURL}
                 onChange={(e) => setPhotoURL(e.target.value)}
                 placeholder="https://images.unsplash.com/..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
               />
             </div>
           </div>
@@ -226,7 +227,7 @@ export default function RegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-colors"
               />
               <button
                 type="button"
@@ -243,15 +244,15 @@ export default function RegisterPage() {
                 Password Requirements:
               </p>
               <div className="grid grid-cols-1 gap-1 text-xs">
-                <div className={`flex items-center gap-1.5 ${hasMinLength ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'}`}>
+                <div className={`flex items-center gap-1.5 ${hasMinLength ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400'}`}>
                   {hasMinLength ? <CheckCircle2 className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
                   <span>At least 6 characters</span>
                 </div>
-                <div className={`flex items-center gap-1.5 ${hasUpperCase ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'}`}>
+                <div className={`flex items-center gap-1.5 ${hasUpperCase ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400'}`}>
                   {hasUpperCase ? <CheckCircle2 className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
                   <span>At least one uppercase letter (A-Z)</span>
                 </div>
-                <div className={`flex items-center gap-1.5 ${hasLowerCase ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'}`}>
+                <div className={`flex items-center gap-1.5 ${hasLowerCase ? 'text-amber-600 dark:text-amber-400' : 'text-slate-400'}`}>
                   {hasLowerCase ? <CheckCircle2 className="w-3.5 h-3.5" /> : <AlertCircle className="w-3.5 h-3.5" />}
                   <span>At least one lowercase letter (a-z)</span>
                 </div>
@@ -274,11 +275,12 @@ export default function RegisterPage() {
           Already have an account?{' '}
           <Link
             href="/login"
-            className="font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+            className="text-amber-500 dark:text-amber-400 hover:text-amber-300 font-semibold"
           >
             Log in here
           </Link>
         </p>
+      </div>
       </div>
     </div>
   );

@@ -47,27 +47,27 @@ export default function UpcomingEventsPage() {
   }, [fetchEvents]);
 
   return (
-    <div className="min-h-screen py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen pt-28 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Page Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-200/80 dark:border-slate-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-8 border-b border-zinc-200/80 dark:border-white/[0.08]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-2">
+          <div className="border border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-300 rounded-full px-3.5 py-1 text-xs font-semibold inline-flex items-center gap-1.5 mb-2">
             <CalendarDays className="w-3.5 h-3.5" />
             <span>Community Service Schedule</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Upcoming Events
           </h1>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 max-w-2xl">
+          <p className="text-sm text-slate-600 dark:text-slate-400 max-w-2xl mt-1">
             Explore and participate in active social service drives across Dhaka and surrounding neighborhoods. Only verified future events are listed.
           </p>
         </div>
 
         <Link
           href="/events/create"
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm transition-all shrink-0"
+          className="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-5 py-2.5 rounded-full text-xs sm:text-sm shadow-lg shadow-amber-500/10 hover:shadow-amber-500/20 transition-all shrink-0 inline-flex items-center gap-2"
         >
-          <PlusCircle className="w-4 h-4" />
+          <PlusCircle className="w-4 h-4 text-slate-950" />
           Host an Event
         </Link>
       </div>
@@ -103,14 +103,14 @@ export default function UpcomingEventsPage() {
 
       {/* No Events Empty State */}
       {!isLoading && events.length === 0 && (
-        <div className="text-center py-20 px-4 rounded-3xl border border-dashed border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/50 max-w-lg mx-auto space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 mx-auto flex items-center justify-center">
+        <div className="text-center py-20 px-4 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 bg-white dark:bg-slate-900/50 max-w-lg mx-auto space-y-4">
+          <div className="w-12 h-12 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 mx-auto flex items-center justify-center">
             <SearchX className="w-6 h-6" />
           </div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white">
             No Upcoming Events Found
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-slate-600 dark:text-slate-400">
             {search || selectedCategory !== 'All'
               ? 'No events match your current filter criteria. Try clearing filters or searching another keyword.'
               : 'There are currently no upcoming events scheduled. Be the first to create one!'}
@@ -121,14 +121,14 @@ export default function UpcomingEventsPage() {
                 setSearch('');
                 setSelectedCategory('All');
               }}
-              className="px-4 py-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 hover:underline"
+              className="px-4 py-2 text-xs font-semibold text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 hover:underline"
             >
               Reset Filters
             </button>
           ) : (
             <Link
               href="/events/create"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-slate-950 hover:bg-amber-400 shadow-sm"
             >
               <PlusCircle className="w-4 h-4" />
               Create an Event

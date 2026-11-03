@@ -17,6 +17,7 @@ export interface User {
 
 export interface EventItem {
   _id: string;
+  organizerId?: string;
   title: string;
   description: string;
   eventType: EventCategory;
