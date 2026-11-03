@@ -31,7 +31,8 @@ function EventDetailsContent() {
   const [hasJoined, setHasJoined] = React.useState(false);
   const [isJoining, setIsJoining] = React.useState(false);
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+  const rawUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+  const apiUrl = rawUrl.replace(/\/+$/, '');
 
   // 1. Fetch Event Details
   React.useEffect(() => {

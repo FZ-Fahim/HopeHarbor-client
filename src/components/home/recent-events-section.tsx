@@ -14,7 +14,8 @@ export function RecentEventsSection() {
   React.useEffect(() => {
     async function fetchRecentEvents() {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const rawUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
+        const apiUrl = rawUrl.replace(/\/+$/, '');
         const res = await fetch(`${apiUrl}/api/events/recent`, {
           cache: 'no-store',
         });
