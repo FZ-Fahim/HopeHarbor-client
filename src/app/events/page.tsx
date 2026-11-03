@@ -13,6 +13,7 @@ export default function UpcomingEventsPage() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [search, setSearch] = React.useState('');
   const [selectedCategory, setSelectedCategory] = React.useState('All');
+  const [viewMode, setViewMode] = React.useState<'grid' | 'list'>('grid');
 
   // Fetch upcoming events from backend
   const fetchEvents = React.useCallback(async () => {
@@ -78,6 +79,8 @@ export default function UpcomingEventsPage() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         totalCount={events.length}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
       />
 
       {/* Loading Skeletons */}
@@ -91,9 +94,9 @@ export default function UpcomingEventsPage() {
 
       {/* Events Grid */}
       {!isLoading && events.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch' : 'flex flex-col gap-4'}>
           {events.map((event) => (
-            <EventCard key={event._id} event={event} />
+            <EventCard key={event._id} event={event} viewMode={viewMode} />
           ))}
         </div>
       )}

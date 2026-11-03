@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Search, Filter, X } from 'lucide-react';
+import { Search, Filter, X, LayoutGrid, List } from 'lucide-react';
 
 interface EventFilterBarProps {
   search: string;
@@ -9,6 +9,8 @@ interface EventFilterBarProps {
   selectedCategory: string;
   setSelectedCategory: (value: string) => void;
   totalCount: number;
+  viewMode: 'grid' | 'list';
+  setViewMode: (value: 'grid' | 'list') => void;
 }
 
 const categories = [
@@ -28,6 +30,8 @@ export function EventFilterBar({
   selectedCategory,
   setSelectedCategory,
   totalCount,
+  viewMode,
+  setViewMode,
 }: EventFilterBarProps) {
   return (
     <div className="space-y-4 mb-8">
@@ -51,6 +55,15 @@ export function EventFilterBar({
               <X className="w-4 h-4" />
             </button>
           )}
+        </div>
+
+        <div className="inline-flex self-end sm:self-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-1" role="group" aria-label="Event view mode">
+          <button type="button" onClick={() => setViewMode('grid')} aria-label="Grid view" aria-pressed={viewMode === 'grid'} className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-emerald-600 text-white' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'}`}>
+            <LayoutGrid className="w-4 h-4" />
+          </button>
+          <button type="button" onClick={() => setViewMode('list')} aria-label="List view" aria-pressed={viewMode === 'list'} className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-emerald-600 text-white' : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'}`}>
+            <List className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Category Dropdown (Mobile View) */}
