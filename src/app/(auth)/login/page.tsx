@@ -49,13 +49,11 @@ export default function LoginPage() {
         description: 'You are now logged in.',
         icon: <CheckCircle2 className="w-5 h-5 text-amber-500 dark:text-amber-400" />,
       });
-
-      const returnUrl =
-          new URLSearchParams(window.location.search).get('returnUrl') ||
-          sessionStorage.getItem('redirectAfterLogin') ||
-          '/events';
-        sessionStorage.removeItem('redirectAfterLogin');
-        router.push(returnUrl);
+      
+      const params = new URLSearchParams(window.location.search);
+      const returnUrl = params.get('returnUrl') || '/events';
+      sessionStorage.removeItem('redirectAfterLogin');
+      router.push(returnUrl);
     } catch (err: unknown) {
       toast.error('Sign-in error', {
         description:
